@@ -55,7 +55,7 @@
             notaExameEditText.setEnabled(false);
             mediaFinalEditText.setEnabled(false);
             notaExame.setEnabled(false);
-            mediaFinalEditView.setEnabled(false);
+
 
             //Definição da barra de frequencia;
             frequenciaSeekBar.setMax(100); // 0% a 100%
@@ -155,6 +155,8 @@
             double n2 = Double.parseDouble(nota2Texto);
             int freq = frequenciaSeekBar.getProgress();
             double mediaSemestral = (n1 + n2) / 2;
+            mediaEditText.setEnabled(false);
+            mediaEditText.setTextColor(Color.WHITE);
 
             if (freq < 75) {
                 // Verifica se a frequencia é menor que 75%, se não reprovado por falta
@@ -176,6 +178,7 @@
                 situacaoEditText.setText("Aprovado");
                 situacaoEditText.setTextColor(Color.GREEN);
                 notaExameEditText.setEnabled(false);
+                mediaEditText.setEnabled(false);
             } else {
                 // Se a média for menor que 7, ele precisa de EXAME
                 situacaoEditText.setText("Colocar Nota Exame");
@@ -185,10 +188,12 @@
                 mediaFinalEditView.setVisibility(View.VISIBLE);
                 notaExame.setVisibility(View.VISIBLE);
                 // Habilite o campo de exame aqui para o usuário digitar
+                mediaEditText.setEnabled(false);
                 notaExameEditText.setEnabled(true);
-                mediaFinalEditText.setEnabled(true);
+                mediaFinalEditText.setEnabled(false);
+                mediaFinalEditText.setTextColor(Color.WHITE);
                 notaExame.setEnabled(true);
-                mediaFinalEditView.setEnabled(true);
+
 
                 // Lógica para calcular a média final se o usuário digitar o exame
                 if (!notaExameTexto.isEmpty()) {

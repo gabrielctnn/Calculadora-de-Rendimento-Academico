@@ -7,4 +7,5 @@
     <string name="media">"Média: "</string>
     <string name="mediaFinal">"Média Final: "</string>
     <string name="situacao">"Situação: "</string>
+    <string name="tituloCalculadora">Calculadora de Rendimento Acâdemico</string>
 </resources>
