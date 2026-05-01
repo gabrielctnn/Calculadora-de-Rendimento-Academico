@@ -105,8 +105,9 @@
             frequenciaSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                    frequenciaEditText.setText(progress + "%");
-                    calcularNota(); // Quando alterar na barra, ele mostra o numero atual e puxa o metodo de calculo apra ver se a presença é valida
+                    if (fromUser) {frequenciaEditText.setText(progress + "%");
+                    calcularNota();
+                    } // Quando alterar na barra, ele mostra o numero atual e puxa o metodo de calculo apra ver se a presença é valida
                 }
 
                 @Override
@@ -115,6 +116,38 @@
 
                 @Override
                 public void onStopTrackingTouch(SeekBar seekBar) {
+                }
+            });
+
+
+            frequenciaEditText.addTextChangedListener(new TextWatcher() {
+                @Override
+                public void afterTextChanged(Editable s) {
+
+                }
+
+                @Override
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                }
+
+                @Override
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                    String valor = s.toString().replace("%", "");
+
+                    // Verificamos se não está vazio para não dar erro ao converter
+                    if (valor.length() > 0) {
+                        int progresso = Integer.parseInt(valor);
+
+                        if (progresso >= 0 && progresso <= 100) {
+                            frequenciaSeekBar.setProgress(progresso);
+                        } else if (progresso > 100) {
+                            // Se passar de 100, a gente "corrige" para o máximo
+                            frequenciaEditText.setText("100%");
+                            frequenciaSeekBar.setProgress(100);
+                            frequenciaEditText.setSelection(frequenciaEditText.getText().length());
+                        }
+                    }
                 }
             });
 
